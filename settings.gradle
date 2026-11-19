@@ -12,6 +12,6 @@ rootProject.name = 'paucal'
 
 include 'Common'
 include 'Fabric'
-include 'Neoforge'
+// include 'Neoforge'
 // Quilt isn't out yet
 // include 'Quilt'
