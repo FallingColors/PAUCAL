@@ -21,7 +21,7 @@ import java.util.UUID;
 public class PatPat {
   public static InteractionResult onPat(Player player, Level world, InteractionHand hand, Entity entity,
       @Nullable EntityHitResult hitResult) {
-    if (!world.getGameRules().getBoolean(PaucalGamerules.ALLOW_HEADPATS)) {
+    if (world instanceof ServerLevel serverWorld && !serverWorld.getGameRules().get(PaucalGamerules.ALLOW_HEADPATS)) {
       // you philistine
       return InteractionResult.PASS;
     }

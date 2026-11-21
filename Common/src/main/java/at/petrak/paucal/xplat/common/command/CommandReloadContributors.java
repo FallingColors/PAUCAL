@@ -10,7 +10,7 @@ import net.minecraft.network.chat.Component;
 
 public class CommandReloadContributors {
   public static void add(LiteralArgumentBuilder<CommandSourceStack> builder) {
-    builder.then(Commands.literal("reload").requires(css -> css.hasPermission(Commands.LEVEL_MODERATORS))
+    builder.then(Commands.literal("reload").requires(Commands.hasPermission(Commands.LEVEL_MODERATORS))
         .executes(ctx -> {
           ContributorsManifest.loadContributors();
 

@@ -3,7 +3,7 @@ package at.petrak.paucal.api.contrib;
 import at.petrak.paucal.xplat.common.msg.MsgHeadpatSoundS2C;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
@@ -20,7 +20,7 @@ public class HeadpatSpec {
   protected HeadpatSpec(String location) {
     this.location = location;
 
-    if (location.contains(":") && ResourceLocation.tryParse(location) != null) {
+    if (location.contains(":") && Identifier.tryParse(location) != null) {
       this.type = Type.VANILLA;
     } else {
       this.type = Type.GITHUB;

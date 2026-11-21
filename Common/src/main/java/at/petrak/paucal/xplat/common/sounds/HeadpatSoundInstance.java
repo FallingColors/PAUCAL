@@ -4,7 +4,7 @@ import at.petrak.paucal.xplat.common.ContributorsManifest;
 import net.minecraft.client.resources.sounds.Sound;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.*;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.phys.Vec3;
@@ -49,7 +49,7 @@ public class HeadpatSoundInstance implements SoundInstance {
   }
 
   @Override
-  public ResourceLocation getLocation() {
+  public Identifier getIdentifier() {
     return modLoc(DUMMY_LOCATION);
   }
 
@@ -97,7 +97,7 @@ public class HeadpatSoundInstance implements SoundInstance {
   }
 
   // and fabric
-  public CompletableFuture<AudioStream> getAudioStream(SoundBufferLibrary soundBuffers, ResourceLocation id,
+  public CompletableFuture<AudioStream> getAudioStream(SoundBufferLibrary soundBuffers, Identifier id,
       boolean looping) {
     return this.getXplatAudioStreamCommon(soundBuffers, looping);
   }
@@ -112,8 +112,8 @@ public class HeadpatSoundInstance implements SoundInstance {
       var loadTheWholeStreamNow = new ImmediateAudioStream(this.stream);
       return CompletableFuture.completedFuture(loadTheWholeStreamNow);
     } else {
-      var decompose = ResourceLocation.tryParse(this.soundName);
-      var actualSoundPath = ResourceLocation.tryBuild(decompose.getNamespace(),
+      var decompose = Identifier.tryParse(this.soundName);
+      var actualSoundPath = Identifier.tryBuild(decompose.getNamespace(),
           "sounds/" + decompose.getPath() + ".ogg");
       return soundBuffers.getStream(actualSoundPath, looping);
     }

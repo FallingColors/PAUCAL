@@ -30,7 +30,14 @@ public abstract class PaucalLootTableSubProvider implements LootTableSubProvider
     this.makeLootTables(blockTables, lootTables);
 
     for (var entry : blockTables.entrySet()) {
-      register.accept(entry.getKey().getLootTable(), entry.getValue().setParamSet(LootContextParamSets.BLOCK));
+      var block = entry.getKey();
+      var builder = entry.getValue();
+
+      block.getLootTable().ifPresent(lootTableKey ->
+        register.accept(lootTableKey,
+          builder.setParamSet(LootContextParamSets.BLOCK)
+        )
+      );
     }
     // isn't that slick
     lootTables.forEach(register);

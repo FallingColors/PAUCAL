@@ -1,6 +1,6 @@
 package at.petrak.paucal.api;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public final class PaucalAPI {
   public static final String MOD_ID = "paucal";
@@ -9,7 +9,7 @@ public final class PaucalAPI {
   public static final String HEADPAT_AUDIO_URL_STUB =
       "https://raw.githubusercontent.com/gamma-delta/contributors/main/paucal/headpat-sounds/";
 
-  public static ResourceLocation modLoc(String s) {
-    return ResourceLocation.tryBuild(MOD_ID, s);
+  public static Identifier modLoc(String s) {
+    return Identifier.tryBuild(MOD_ID, s);
   }
 }

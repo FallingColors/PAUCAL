@@ -21,13 +21,13 @@ public class CommandPatSound {
                 Component.translatable("command.paucal.patSelf.bad_count", pattees.size()));
             return 0;
           }
-          return execute(pattees.iterator().next().getId(), ctx);
+          return execute(pattees.iterator().next().id(), ctx);
         }))
         .executes(ctx -> execute(ctx.getSource().getPlayerOrException().getUUID(), ctx)));
   }
 
   private static int execute(UUID target, CommandContext<CommandSourceStack> ctx) {
-    var enabled = ctx.getSource().getLevel().getGameRules().getBoolean(PaucalGamerules.ALLOW_HEADPATS);
+    var enabled = ctx.getSource().getLevel().getGameRules().get(PaucalGamerules.ALLOW_HEADPATS);
     if (!enabled) {
       ctx.getSource().sendFailure(Component.translatable("command.paucal.patSelf.disabled"));
       return 0;

@@ -70,7 +70,7 @@ public class Contributor {
     }
 
     if (level instanceof ServerLevel slevel) {
-      var idx = level.random.nextInt(this.headpats.size());
+      var idx = level.getRandom().nextInt(this.headpats.size());
       var patspec = this.headpats.get(idx);
       var pitch = this.pitchCenter + (float) (Math.random() - 0.5) * this.pitchVariance;
 

@@ -7,7 +7,7 @@ import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.stats.StatFormatter;
 
@@ -25,15 +25,15 @@ public class ModRegistries {
       SOUNDS.register("headpat",
           () -> SoundEvent.createVariableRangeEvent(modLoc(HeadpatSoundInstance.DUMMY_LOCATION)));
 
-  public static final DeferredRegister<ResourceLocation> STATS =
+  public static final DeferredRegister<Identifier> STATS =
       DeferredRegister.create(PaucalAPI.MOD_ID, Registries.CUSTOM_STAT);
-  public static final RegistrySupplier<ResourceLocation> PLAYERS_PATTED =
+  public static final RegistrySupplier<Identifier> PLAYERS_PATTED =
       makeCustomStat("players_patted", StatFormatter.DEFAULT);
-  public static final RegistrySupplier<ResourceLocation> HEADPATS_GOTTEN =
+  public static final RegistrySupplier<Identifier> HEADPATS_GOTTEN =
       makeCustomStat("headpats_gotten", StatFormatter.DEFAULT);
 
-  private static RegistrySupplier<ResourceLocation> makeCustomStat(String pKey, StatFormatter pFormatter) {
-    ResourceLocation rl = PaucalAPI.modLoc(pKey);
+  private static RegistrySupplier<Identifier> makeCustomStat(String pKey, StatFormatter pFormatter) {
+    Identifier rl = PaucalAPI.modLoc(pKey);
     var out = STATS.register(pKey, () -> {
       return rl;
     });
