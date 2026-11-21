@@ -1,6 +1,7 @@
 {
     "pack": {
-        "description": "examplemod resources",
-        "pack_format": 9
+        "description": "P.A.U.C.A.L. resources",
+        "min_format": [84, 0],
+        "max_format": [101, 1]
     }
 }

@@ -14,11 +14,11 @@ import net.minecraft.world.level.gamerules.GameRuleTypeVisitor;
 // Holds registered game-rule definition
 public class PaucalGamerules {
 
-  // Preserving rule's original ID of paucal:allowHeadpats
+  // Minecraft's resource identifiers must use lowercase sadly 
   public static final GameRule<Boolean> ALLOW_HEADPATS = 
     Registry.register(
       BuiltInRegistries.GAME_RULE,
-      Identifier.tryBuild("paucal", "allowHeadpats"), 
+      Identifier.fromNamespaceAndPath("paucal", "allow_headpats"), 
       new GameRule<>(
         GameRuleCategory.PLAYER,
         GameRuleType.BOOL,
