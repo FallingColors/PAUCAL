@@ -71,3 +71,8 @@ subprojects {
         targetCompatibility = JavaVersion.VERSION_25
     }
 }
+
+allprojects {
+    group = rootProject.maven_group
+    version = "${rootProject.mod_version}+${rootProject.minecraft_version}"
+}
