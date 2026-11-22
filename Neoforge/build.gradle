@@ -1,5 +1,5 @@
 plugins {
-    id 'com.github.johnrengelman.shadow'
+    id 'com.gradleup.shadow'
 }
 
 architectury {
@@ -7,16 +7,16 @@ architectury {
     neoForge()
 }
 
-pkSubproj {
-    platform = "neoforge"
-    pkPublish = true
+// pkSubproj {
+//     platform = "neoforge"
+//     pkPublish = true
 
-    curseforgeJar = tasks.remapJar.archiveFile
-    curseforgeDependencies["architectury-api"]
+//     curseforgeJar = tasks.remapJar.archiveFile
+//     curseforgeDependencies["architectury-api"]
 
-    modrinthJar = tasks.remapJar.archiveFile
-    modrinthDependencies["architectury-api:13.0.6+neoforge"]
-}
+//     modrinthJar = tasks.remapJar.archiveFile
+//     modrinthDependencies["architectury-api:13.0.6+neoforge"]
+// }
 
 configurations {
     common {
@@ -46,13 +46,13 @@ dependencies {
     neoForge "net.neoforged:neoforge:$rootProject.neoforge_version"
 
     // Architectury API. This is optional, and you can comment it out if you don't need it.
-    modImplementation "dev.architectury:architectury-neoforge:$rootProject.architectury_api_version"
+    implementation "dev.architectury:architectury-neoforge:$rootProject.architectury_api_version"
 
-    common(project(path: ':Common', configuration: 'namedElements')) { transitive false }
+    common(project(path: ':Common')) { transitive false }
     shadowBundle(project(path: ':Common', configuration: 'transformProductionNeoForge')) { transitive false }
 
-    modLocalRuntime "blue.endless:jankson:$rootProject.jankson_version"
-    forgeRuntimeLibrary(shadowBundle("blue.endless:jankson:$rootProject.jankson_version"))
+    implementation "blue.endless:jankson:$rootProject.jankson_version"
+    shadowBundle "blue.endless:jankson:$rootProject.jankson_version"
 }
 
 def generatedResources = project(":Common").file("src/generated/resources")
@@ -73,6 +73,16 @@ loom {
     }
 }
 
+sourceSets {
+    main {
+        java {
+            exclude 'at/petrak/paucal/forge/api/datagen/**'
+            exclude 'at/petrak/paucal/forge/datagen/**'
+            exclude 'at/petrak/paucal/forge/mixin/ArchiDatagenStoppinator.java'
+        }
+    }
+}
+
 processResources {
     inputs.property 'version', project.version
 
@@ -86,9 +96,4 @@ shadowJar {
 
     configurations = [project.configurations.shadowBundle]
     archiveClassifier = 'dev-shadow'
-}
-
-remapJar {
-    input.set shadowJar.archiveFile
-    dependsOn(shadowJar)
 }
